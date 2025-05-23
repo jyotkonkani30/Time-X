@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TIME-X AI</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+  <style>
+    .neural-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -1;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.neural-background svg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  animation: float 20s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.05) translateY(-10px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 0.1; }
+}
+
+#welcome-msg {
+  margin-top: 1.5rem;
+  font-size: 1.7rem;
+  background: linear-gradient(90deg, #00f0ff, #7a00ff, #00f0ff);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowText 6s linear infinite;
+  font-weight: bold;
+  text-align: center;
+}
+
+@keyframes glowText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+  
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: #ffffff;
+      color: #000;
+      overflow: hidden;
+    }
+
+    #splash {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 5s;
+    }
+
+    .ai-logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1rem;
+      animation: spin 4s linear infinite;
+    }
+
+    .logo {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 4rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      letter-spacing: 3px;
+      position: relative;
+    }
+
+    .logo span {
+      opacity: 0;
+      animation: fadeInLetter 0.5s ease forwards;
+    }
+
+    .logo span:nth-child(1) { animation-delay: 0.2s; }
+    .logo span:nth-child(2) { animation-delay: 0.6s; }
+    .logo span:nth-child(3) { animation-delay: 1s; }
+    .logo span:nth-child(4) { animation-delay: 1.4s; }
+    .logo span:nth-child(5) { animation-delay: 1.8s; }
+    .logo span:nth-child(6) { animation-delay: 2.2s; }
+
+    .underline {
+      width: 140px;
+      height: 3px;
+      background-color: #000;
+      margin-top: 0.5rem;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 2.6s;
+    }
+
+    #welcome-msg {
+      margin-top: 1.5rem;
+      font-size: 1.5rem;
+      color: purple;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 3.5s;
+    }
+
+    @keyframes fadeInLetter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #main-content {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    body.loaded #main-content {
+      opacity: 1;
+      overflow: auto;
+    }
+
+    header {
+      background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-logo {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      width: 50px;
+      animation: spin 10s linear infinite;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    nav button {
+  background: linear-gradient(135deg, #00f0ff, #0077ff);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 255, 255, 0.3);
+}
+
+nav button:hover {
+  background: linear-gradient(135deg, #00d9ff, #0055ff);
+  transform: scale(1.05);
+}
+
+
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    section {
+      display: none;
+      padding: 2rem;
+      margin-top: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .coming-soon {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: crimson;
+      margin-top: 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1rem;
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+    }
+
+    
+  </style>
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash">
+  <div class="neural-background">
+    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+      <g stroke="#00f0ff" stroke-opacity="0.6" stroke-width="0.5">
+        <circle cx="400" cy="300" r="2"></circle>
+        <line x1="400" y1="300" x2="450" y2="320"></line>
+        <circle cx="450" cy="320" r="2"></circle>
+        <line x1="450" y1="320" x2="480" y2="260"></line>
+        <circle cx="480" cy="260" r="2"></circle>
+        <line x1="480" y1="260" x2="430" y2="240"></line>
+        <circle cx="430" cy="240" r="2"></circle>
+        <line x1="430" y1="240" x2="400" y2="300"></line>
+        <!-- Add more lines and circles for neural node style -->
+      </g>
+    </svg>
+  </div>
+
+  <div class="logo">
+    <span>T</span>
+    <span>I</span>
+    <span>M</span>
+    <span>E</span>
+    <span>-</span>
+    <span>X</span>
+  </div>
+  <div class="underline"></div>
+  <div id="welcome-msg">Welcome to the AI World</div>
+</div>
+
+
+  <!-- Main Website -->
+  <div id="main-content">
+    <header>
+      <img class="header-logo" src="https://cdn-icons-png.flaticon.com/512/4712/4712034.png" alt="AI" />
+      <h1>Welcome to TIME-X AI Services</h1>
+      <p>Hello! I'm Jyot, creator of futuristic AI solutions. Explore the options below!</p>
+      <nav>
+        <button onclick="showSection('rent')">Rent AI</button>
+        <button onclick="showSection('buy')">Buy AI</button>
+        <button onclick="showSection('modify')">Modify AI</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="rent">
+        <h2>Rent AI</h2>
+        <p>Need temporary access to powerful AI models?</p>
+        <div class="coming-soon">Coming Soon...</div>
+      </section>
+
+      <section id="buy">
+        <h2>Buy AI</h2>
+        <p>Get your own customized AI system for long-term use.</p>
+        <p>Prebooking will start from $2.99</p>
+        <div class="coming-soon">Coming Soon...</div>
+      </section>
+
+      <section id="modify">
+        <h2>Modify AI</h2>
+        <p>Already have an AI? Let us enhance and optimize it for you.
+           prebooking will start from $2.99
+        </p>
+        <div class="coming-soon">Coming Soon...</div>
+      </section>
+    </main>
+
+    <footer>
+      &copy; 2025 TIME-X AI Services. Created by Jyot. services under progress.
+    </footer>
+  </div>
+
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.body.classList.add("loaded");
+      }, 5000);
+    });
+
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => {
+        sec.classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
+
+</body>
+</html>
