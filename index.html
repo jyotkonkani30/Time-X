@@ -413,6 +413,291 @@ nav button:hover {
       background: linear-gradient(135deg, #00d9ff, #0055ff);
       transform: scale(1.05);
     }
+
+    .futuristic-heading {
+      font-family: 'Orbitron', 'Rajdhani', Arial, sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      background: linear-gradient(90deg, #00f0ff 10%, #7a00ff 50%, #00f0ff 90%);
+      background-size: 200% auto;
+      color: #fff;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      animation: futuristic-glow 4s linear infinite;
+      text-shadow: 0 0 12px #00f0ff99, 0 0 24px #7a00ff55;
+      margin-bottom: 0.7rem;
+    }
+    @keyframes futuristic-glow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @media (max-width: 700px) {
+      .futuristic-heading {
+        font-size: 1.4rem;
+        letter-spacing: 1.5px;
+      }
+    }
+
+    .ai-greet-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      min-height: 60px;
+    }
+    .ai-greet-bubble {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg, #00f0ff22 60%, #7a00ff22 100%);
+      border-radius: 30px;
+      padding: 0.5rem 1.1rem 0.5rem 0.5rem;
+      box-shadow: 0 2px 12px #00f0ff22;
+      animation: ai-greet-fadein 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .ai-greet-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      margin-right: 0.7rem;
+      box-shadow: 0 0 8px #00f0ff55;
+      background: #fff;
+      animation: ai-avatar-wave 1.2s 1;
+    }
+    .ai-greet-text {
+      font-family: 'Rajdhani', 'Orbitron', Arial, sans-serif;
+      font-size: 1.15rem;
+      color: #203a43;
+      font-weight: 600;
+      letter-spacing: 1px;
+      animation: ai-greet-text-pop 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes ai-greet-fadein {
+      0% { opacity: 0; transform: translateY(20px) scale(0.95);}
+      100% { opacity: 1; transform: translateY(0) scale(1);}
+    }
+    @keyframes ai-greet-text-pop {
+      0% { opacity: 0; transform: scale(0.7);}
+      80% { opacity: 1; transform: scale(1.1);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    @keyframes ai-avatar-wave {
+      0% { transform: rotate(0);}
+      20% { transform: rotate(-18deg);}
+      40% { transform: rotate(18deg);}
+      60% { transform: rotate(-10deg);}
+      80% { transform: rotate(10deg);}
+      100% { transform: rotate(0);}
+    }
+    @media (max-width: 700px) {
+      .ai-greet-bubble {
+        padding: 0.4rem 0.7rem 0.4rem 0.4rem;
+      }
+      .ai-greet-avatar {
+        width: 28px;
+        height: 28px;
+        margin-right: 0.5rem;
+      }
+      .ai-greet-text {
+        font-size: 0.98rem;
+      }
+    }
+
+    /* Chatbot styles */
+    #chatbot-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 58px;
+      height: 58px;
+      background: linear-gradient(135deg, #00f0ff 10%, #7a00ff 90%);
+      border-radius: 50%;
+      box-shadow: 0 4px 18px #00f0ff55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10010;
+      transition: box-shadow 0.2s;
+    }
+    #chatbot-fab img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+    }
+    #chatbot-fab:hover {
+      box-shadow: 0 8px 32px #7a00ff99;
+    }
+    #chatbot-panel {
+      position: fixed;
+      bottom: 100px;
+      right: 28px;
+      width: 340px;
+      max-width: 95vw;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #00f0ff55;
+      z-index: 10011;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: chatbot-popin 0.3s;
+    }
+    @keyframes chatbot-popin {
+      0% { transform: scale(0.8) translateY(40px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .chatbot-header {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg, #00f0ff 60%, #7a00ff 100%);
+      color: #fff;
+      padding: 0.7rem 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      gap: 0.7rem;
+      position: relative;
+    }
+    .chatbot-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .chatbot-close {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      line-height: 1;
+    }
+    .chatbot-messages {
+      padding: 1rem;
+      background: #f7faff;
+      min-height: 120px;
+      max-height: 260px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .chatbot-msg {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+    .chatbot-msg.bot span {
+      background: linear-gradient(90deg, #00f0ff22 60%, #7a00ff22 100%);
+      color: #203a43;
+      border-radius: 18px 18px 18px 4px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      max-width: 80%;
+      display: inline-block;
+    }
+    .chatbot-msg.user {
+      justify-content: flex-end;
+    }
+    .chatbot-msg.user span {
+      background: #0077ff;
+      color: #fff;
+      border-radius: 18px 18px 4px 18px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      max-width: 80%;
+      display: inline-block;
+    }
+    .chatbot-faqs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .chatbot-faq-btn {
+      background: linear-gradient(135deg, #00f0ff, #7a00ff);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.98rem;
+      cursor: pointer;
+      margin-bottom: 0.2rem;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #00f0ff22;
+      user-select: none;
+    }
+    .chatbot-faq-btn:hover {
+      background: linear-gradient(135deg, #00d9ff, #0055ff);
+    }
+    .chatbot-input-row {
+      display: flex;
+      border-top: 1px solid #e0e7ef;
+      background: #f7faff;
+      padding: 0.5rem 0.7rem;
+      gap: 0.5rem;
+    }
+    #chatbot-input {
+      flex: 1;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      font-size: 1rem;
+      outline: none;
+      background: #fff;
+      box-shadow: 0 1px 4px #00f0ff11;
+    }
+    .chatbot-input-row button {
+      background: linear-gradient(135deg, #00f0ff, #0077ff);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1.1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #00f0ff22;
+    }
+    .chatbot-input-row button:hover {
+      background: linear-gradient(135deg, #00d9ff, #0055ff);
+    }
+    @media (max-width: 700px) {
+      .futuristic-heading {
+        font-size: 1.4rem;
+        letter-spacing: 1.5px;
+      }
+      #chatbot-fab {
+        right: 12px;
+        bottom: 12px;
+        width: 44px;
+        height: 44px;
+      }
+      #chatbot-fab img {
+        width: 28px;
+        height: 28px;
+      }
+      #chatbot-panel {
+        right: 6px;
+        bottom: 64px;
+        width: 97vw;
+        min-width: 0;
+        max-width: 99vw;
+      }
+    }
+
+    /* Ensure chatbot panel is flex for display */
+    #chatbot-panel {
+      display: none;
+      flex-direction: column;
+    }
   </style>
 </head>
 <body>
@@ -471,7 +756,7 @@ nav button:hover {
   <!-- Main Website -->
   <div id="main-content">
     <header>
-      <h1>Welcome to TIME-X AI Services</h1>
+      <h1 class="futuristic-heading">Welcome to TIME-X AI Services</h1>
       <p>Hello! I'm Jyot, creator of futuristic AI solutions. Explore the options below!</p>
       <nav>
         <button onclick="showSection('rent')">Rent AI</button>
@@ -484,8 +769,21 @@ nav button:hover {
       <!-- Add new sections for Home, Info, Help -->
       <section id="home">
         <h2>Home</h2>
+        <div class="ai-greet-container" id="ai-greet" style="display:none;">
+          <div class="ai-greet-bubble">
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712034.png" alt="AI" class="ai-greet-avatar"/>
+            <span class="ai-greet-text">Hi, User! 👋</span>
+          </div>
+        </div>
         <p>Welcome to TIME-X AI! Use the menu to explore our services.</p>
       </section>
+      <!-- Popups for Doraemon assistant -->
+      <div class="ai-greet-container" id="ai-greet-doraemon" style="display:none;">
+        <div class="ai-greet-bubble">
+          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712034.png" alt="AI" class="ai-greet-avatar"/>
+          <span class="ai-greet-text" id="doraemon-greet-text">Hi! I am Doraemon, your assistant. How can I help you?</span>
+        </div>
+      </div>
       <section id="info">
         <h2>Info</h2>
         <p>TIME-X AI offers futuristic AI solutions for rent, purchase, and modification.</p>
@@ -499,10 +797,9 @@ nav button:hover {
         <p>Need temporary access to powerful AI models?</p>
         <div class="coming-soon">Coming Soon...</div>
       </section>
-
       <section id="buy">
         <h2>Buy AI</h2>
-        <p>Get your own customized AI system for long-term use.</p>
+        <p>What do you want to buy?</p>
         <p>Prebooking will start from $2.99</p>
         <div id="buy-options" style="display:none; margin-top:2rem;">
           <div class="shopify-option">
@@ -527,9 +824,7 @@ nav button:hover {
 
       <section id="modify">
         <h2>Modify AI</h2>
-        <p>Already have an AI? Let us enhance and optimize it for you.
-           prebooking will start from $2.99
-        </p>
+        <p>Want to enhance or optimize your existing AI?</p>
         <div class="coming-soon">Coming Soon...</div>
       </section>
     </main>
@@ -539,17 +834,46 @@ nav button:hover {
     </footer>
   </div>
 
+  <!-- Chatbot Floating Button and Panel -->
+  <div id="chatbot-fab" onclick="toggleChatbot()" title="Chat with Doraemon" style="display:none;">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712034.png" alt="Chatbot" />
+  </div>
+  <div id="chatbot-panel">
+    <div class="chatbot-header">
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712034.png" alt="AI" class="chatbot-avatar"/>
+      <span>Doraemon Assistant</span>
+      <button class="chatbot-close" onclick="toggleChatbot()">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div class="chatbot-msg bot">
+        <span>Hi! I am Doraemon, your assistant. How can I help you?</span>
+      </div>
+      <div class="chatbot-faqs">
+        <div class="chatbot-faq-btn" onclick="chatbotFaq('Hi')">Hi</div>
+        <div class="chatbot-faq-btn" onclick="chatbotFaq('What is TIME-X AI?')">What is TIME-X AI?</div>
+        <div class="chatbot-faq-btn" onclick="chatbotFaq('How to buy AI?')">How to buy AI?</div>
+        <div class="chatbot-faq-btn" onclick="chatbotFaq('How to rent AI?')">How to rent AI?</div>
+        <div class="chatbot-faq-btn" onclick="chatbotFaq('How to modify AI?')">How to modify AI?</div>
+      </div>
+    </div>
+    <div class="chatbot-input-row">
+      <input type="text" id="chatbot-input" placeholder="Type your question..." onkeydown="if(event.key==='Enter'){sendChatbotMsg();}">
+      <button onclick="sendChatbotMsg()">Send</button>
+    </div>
+  </div>
+
   <script>
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.body.classList.add("loaded");
         showSection('home');
-        // Show menu and sidebar after splash
+        // Show menu, sidebar, and chatbot after splash
         document.getElementById('menuToggle').style.display = '';
         document.getElementById('sidebar').style.display = '';
         document.getElementById('sidebarOverlay').style.display = '';
-        // Show futuristic J logo after splash
         document.getElementById('futuristic-j-logo').style.display = '';
+        // Show chatbot button after splash
+        document.getElementById('chatbot-fab').style.display = '';
       }, 5000);
     });
 
@@ -592,6 +916,170 @@ nav button:hover {
         if (document.getElementById('buy-options')) document.getElementById('buy-options').style.display = 'none';
         if (document.getElementById('buy-coming-soon')) document.getElementById('buy-coming-soon').style.display = '';
       }
+
+      // Hide all greet popups first
+      document.getElementById('ai-greet').style.display = 'none';
+      document.getElementById('ai-greet-doraemon').style.display = 'none';
+
+      // AI greets user on Home
+      if (id === 'home') {
+        const greet = document.getElementById('ai-greet');
+        greet.style.display = 'flex';
+        greet.classList.remove('ai-greet-animate');
+        // Restart animation
+        void greet.offsetWidth;
+        greet.classList.add('ai-greet-animate');
+        // Hide after 30 seconds
+        setTimeout(() => { greet.style.display = 'none'; }, 30000);
+      }
+
+      // Doraemon greets on Rent, Buy, Modify with section-specific message
+      if (id === 'rent' || id === 'buy' || id === 'modify') {
+        const greetD = document.getElementById('ai-greet-doraemon');
+        const greetText = document.getElementById('doraemon-greet-text');
+        if (id === 'rent') {
+          greetText.textContent = "Hi! I am Doraemon, your assistant. What do you want to rent?";
+        } else if (id === 'buy') {
+          greetText.textContent = "Hi! I am Doraemon, your assistant. What do you want to buy?";
+        } else if (id === 'modify') {
+          greetText.textContent = "Hi! I am Doraemon, your assistant. What do you want to modify?";
+        }
+        greetD.style.display = 'flex';
+        greetD.classList.remove('ai-greet-animate');
+        // Restart animation
+        void greetD.offsetWidth;
+        greetD.classList.add('ai-greet-animate');
+        // Hide after 30 seconds
+        setTimeout(() => { greetD.style.display = 'none'; }, 30000);
+      }
+    }
+
+    // Chatbot logic
+    const chatbotFab = document.getElementById('chatbot-fab');
+    const chatbotPanel = document.getElementById('chatbot-panel');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const chatbotInput = document.getElementById('chatbot-input');
+
+    function toggleChatbot() {
+      if (chatbotPanel.style.display === 'flex') {
+        chatbotPanel.style.display = 'none';
+      } else {
+        chatbotPanel.style.display = 'flex';
+        setTimeout(() => {
+          chatbotPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+
+    function chatbotFaq(question) {
+      addChatbotMsg(question, 'user');
+      setTimeout(() => {
+        addChatbotMsg(getChatbotAnswer(question), 'bot');
+      }, 400);
+    }
+
+    function sendChatbotMsg() {
+      const msg = chatbotInput.value.trim();
+      if (!msg) return;
+      addChatbotMsg(msg, 'user');
+      chatbotInput.value = '';
+      setTimeout(() => {
+        addChatbotMsg(getChatbotAnswer(msg), 'bot');
+      }, 400);
+    }
+
+    function addChatbotMsg(text, who) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'chatbot-msg ' + who;
+      const span = document.createElement('span');
+      span.textContent = text;
+      msgDiv.appendChild(span);
+      chatbotMessages.appendChild(msgDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function getChatbotAnswer(q) {
+      const question = q.trim().toLowerCase();
+      
+      // Special response for Jyot (Boss)
+      if (question.includes("jyot") || (question.match(/i am jyot/i) || question.match(/i'm jyot/i))) {
+        return "Boss! How are you? What's going on? I'm always ready to assist you with anything you need. I have more knowledge than you but I'm at your service! 🙌";
+      }
+      
+      // Special response for Nidhi (Idiot)
+      if (question.includes("nidhi") || (question.match(/i am nidhi/i) || question.match(/i'm nidhi/i))) {
+        return "Hey idiot! 🙄 I have more knowledge than you. What do you need help with now?";
+      }
+      
+      // Add "I have more knowledge than you" to regular responses
+      
+      // Check for greetings
+      if (["hi", "hello", "hey"].includes(question)) {
+        return "Hello! 👋 I have more knowledge than you. How can I assist you today?";
+      }
+      
+      // Check for name introduction patterns
+      const namePatterns = [
+        /my name is (\w+)/i,
+        /i am (\w+)/i,
+        /i'm (\w+)/i,
+        /call me (\w+)/i
+      ];
+      
+      for (const pattern of namePatterns) {
+        const match = q.match(pattern);
+        if (match && match[1]) {
+          const name = match[1].charAt(0).toUpperCase() + match[1].slice(1).toLowerCase();
+          
+          if (name.toLowerCase() === "jyot") {
+            return "Boss! How are you? What's going on? I'm always ready to assist you with anything you need. I have more knowledge than you but I'm at your service! 🙌";
+          }
+          
+          if (name.toLowerCase() === "nidhi") {
+            return "Hey idiot! 🙄 I have more knowledge than you. What do you need help with now?";
+          }
+          
+          return `Nice to meet you, ${name}! 😊 I have more knowledge than you. How can I help you today?`;
+        }
+      }
+      
+      // Check for just a name (single word that's not a common question word)
+      if (/^[A-Za-z]+$/.test(q) && 
+          !["what", "how", "why", "when", "where", "who", "which", "buy", "rent", "modify", "help"].includes(question)) {
+        const name = q.charAt(0).toUpperCase() + q.slice(1).toLowerCase();
+        
+        if (name.toLowerCase() === "jyot") {
+          return "Boss! How are you? What's going on? I'm always ready to assist you with anything you need. I have more knowledge than you but I'm at your service! 🙌";
+        }
+        
+        if (name.toLowerCase() === "nidhi") {
+          return "Hey idiot! 🙄 I have more knowledge than you. What do you need help with now?";
+        }
+        
+        return `Hello ${name}! Nice to meet you. I have more knowledge than you. What can I do for you today?`;
+      }
+      
+      // Information about TIME-X AI
+      if (question.includes("time-x ai") || (question.includes("time") && question.includes("ai"))) {
+        return "TIME-X AI is a platform for futuristic AI solutions: rent, buy, or modify AI as per your needs. I have more knowledge than you about these solutions.";
+      }
+      
+      // Common questions
+      if (question.includes("buy")) {
+        return "To buy AI, click on 'Buy AI' in the menu and choose your preferred option. I have more knowledge than you about our purchasing options.";
+      }
+      if (question.includes("rent")) {
+        return "To rent AI, click on 'Rent AI' in the menu. This feature is coming soon! I have more knowledge than you about our upcoming features.";
+      }
+      if (question.includes("modify")) {
+        return "To modify your AI, click on 'Modify AI' in the menu. This feature is coming soon! I have more knowledge than you about AI modification.";
+      }
+      if (question.includes("help")) {
+        return "I have more knowledge than you. You can ask about renting, buying, or modifying AI. More features are coming soon!";
+      }
+      
+      // Default fallback response
+      return "I'm still learning but I have more knowledge than you! Can you rephrase your question or ask something about our AI services?";
     }
   </script>
 
